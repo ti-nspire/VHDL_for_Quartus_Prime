@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 
 entity counter_bcd is
 	generic(
-		NUM_BCD: natural := 4 -- BCDカウンターの連結数
+		NUM_BCD: natural := 4 -- the number of digits of BCD counters
 	);
 	port(
 		clr_n: in  std_logic;
