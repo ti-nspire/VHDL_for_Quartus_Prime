@@ -16,29 +16,29 @@ entity one_hot_state_counter is
 end entity;
 
 architecture rtl of one_hot_state_counter is
+	procedure reset is
+	begin
+		n_phase_clk(NUM_PHASES-1 downto 1) <= (others => '0');
+		n_phase_clk(0) <= '1';
+	end procedure;
 begin
-
 	process(all)
-		variable count: natural := 0;
 	begin
 		-- 非同期リセット
-		if aclr_n = '0' then
-			count := 0;
+		if aclr_n = '0' then	reset;
+
 		elsif rising_edge(clk) then
 			-- 同期リセット
-			if sclr_n = '0' then
-				count := 0;
-			-- オーバーフローしたらリセット
-			elsif count >= NUM_PHASES-1 then
-				count := 0;
-			-- オーバーフローするまでカウントアップ
+			if sclr_n = '0' then reset;
+		   -- MSBに1が立ったら次のクロックでリセット
+			elsif n_phase_clk(NUM_PHASES-1) then
+				reset;
+		   -- MSBに1が立つまで左へシフト
 			else
-				count := count + 1;
+				n_phase_clk <= n_phase_clk(NUM_PHASES-2 downto 0) & '0';
 			end if;
 		end if;
-		-- N相クロックを出力
-		n_phase_clk <= std_logic_vector(to_unsigned(2 ** count, NUM_PHASES)); -- 1倍、2倍、4倍、8倍...でone hotを移動
-		--n_phase_clk <= std_logic_vector(shift_left(to_unsigned(1, NUM_PHASES), count)); -- シフトでone hotを移動
+
 	end process;
 
 end architecture;
