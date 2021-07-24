@@ -31,10 +31,10 @@ begin
 			-- 同期リセット
 			if sclr_n = '0' then
 				reset;
-		   -- MSBに1が立ったら次のクロックでリセット
+			-- MSBに1が立ったら次のクロックでリセット
 			elsif n_phase_clk(NUM_PHASES-1) then
 				reset;
-		   -- MSBに1が立つまで左へシフト
+			-- MSBに1が立つまで左へシフト
 			else
 				n_phase_clk <= n_phase_clk(NUM_PHASES-2 downto 0) & '0';
 			end if;
