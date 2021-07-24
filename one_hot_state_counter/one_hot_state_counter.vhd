@@ -39,7 +39,5 @@ begin
 				n_phase_clk <= n_phase_clk(NUM_PHASES-2 downto 0) & '0';
 			end if;
 		end if;
-
 	end process;
-
 end architecture;
