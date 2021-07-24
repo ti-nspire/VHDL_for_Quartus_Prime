@@ -37,7 +37,8 @@ begin
 			end if;
 		end if;
 		-- N相クロックを出力
-		n_phase_clk <= std_logic_vector(to_unsigned(2 ** count, NUM_PHASES));
+		n_phase_clk <= std_logic_vector(to_unsigned(2 ** count, NUM_PHASES)); -- 1倍、2倍、4倍、8倍...でone hotを移動
+		--n_phase_clk <= std_logic_vector(shift_left(to_unsigned(1, NUM_PHASES), count)); -- シフトでone hotを移動
 	end process;
 
 end architecture;
