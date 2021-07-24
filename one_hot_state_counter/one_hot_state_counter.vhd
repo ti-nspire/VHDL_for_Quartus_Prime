@@ -25,11 +25,12 @@ begin
 	process(all)
 	begin
 		-- 非同期リセット
-		if aclr_n = '0' then	reset;
-
+		if aclr_n = '0' then
+			reset;
 		elsif rising_edge(clk) then
 			-- 同期リセット
-			if sclr_n = '0' then reset;
+			if sclr_n = '0' then
+				reset;
 		   -- MSBに1が立ったら次のクロックでリセット
 			elsif n_phase_clk(NUM_PHASES-1) then
 				reset;
