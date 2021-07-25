@@ -31,7 +31,7 @@ begin
 			-- 同期リセット
 			if sclr_n = '0' then
 				reset;
-			-- MSBに1が立ったら次のクロックでリセット
+			-- MSBに1が立っていたらリセット
 			elsif n_phase_clk(NUM_PHASES-1) then
 				reset;
 			-- MSBに1が立っていなければ左へシフト
