@@ -24,8 +24,11 @@ architecture rtl of one_hot_state_counter is
 begin
 	process(all)
 	begin
+		-- どこにも1が立っていなかったらリセット
+		if unsigned(n_phase_clk) = 0 then
+			reset;
 		-- 非同期リセット
-		if aclr_n = '0' then
+		elsif aclr_n = '0' then
 			reset;
 		elsif rising_edge(clk) then
 			-- 同期リセット
@@ -34,12 +37,9 @@ begin
 			-- MSBに1が立っていたらリセット
 			elsif n_phase_clk(NUM_PHASES-1) then
 				reset;
-			-- MSBに1が立っていなければ左へシフト
-			elsif n_phase_clk(NUM_PHASES-1) = '0' then
-				n_phase_clk <= n_phase_clk(NUM_PHASES-2 downto 0) & '0';
-			-- いずれでもなければLSBに1を立てる。
+			-- いずれでもなければ左へシフト
 			else
-				reset;
+				n_phase_clk <= n_phase_clk(NUM_PHASES-2 downto 0) & '0';
 			end if;
 		end if;
 	end process;
