@@ -1,6 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
+--use ieee.numeric_std.all;
 
 entity example_for_displaying_a_constant is
 	port(
