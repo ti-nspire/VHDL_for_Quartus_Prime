@@ -59,7 +59,7 @@ architecture rtl of char_LCD_8_digits is
 		end if;
 	end function;
 
-	function lower_4(num: std_logic_vector)
+	function lower_4(num: std_logic_vector(3 downto 0))
 		return std_logic_vector	is
 	begin
 		if   unsigned(num) < 10 then return num;       -- when 0-9
