@@ -46,6 +46,10 @@ architecture rtl of char_LCD_8_digits is
 	
 	signal pr_state, nx_state: state_type;
 	/*
+	attribute syn_encoding: string;
+	attribute syn_encoding of state_type: type is "compact";
+	*/
+	/*
 	attribute keep: boolean;
 	attribute keep of pr_state, nx_state: signal is true;
 	*/
