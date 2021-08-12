@@ -122,8 +122,8 @@ begin
 			when EntryMode_H => DB <= "0000"; nx_state <= EntryMode_L;
 			when EntryMode_L => DB <= "0110"; nx_state <= W8H; -- first, display a highest-order digit.
 
-			-- Type_Name'pos(Type_Value) gets its position number (integer).
-			-- Type_Name'val(Position_Number) gets its type value.
+			-- Type_Name'pos(Type_Value) provides its position number (integer).
+			-- Type_Name'val(Position_Number) provides its type value.
 			when W1H to W8H => -- states 1-8
 				RS <= '1';
 				DB <= upper_4(bin_in(state_type'pos(pr_state)*4-1 downto state_type'pos(pr_state)*4-4));
