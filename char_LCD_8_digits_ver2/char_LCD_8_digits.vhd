@@ -131,7 +131,7 @@ begin
 			when W1L to W8L => -- states 9-16
 				RS <= '1';
 				DB <= lower_4(bin_in((state_type'pos(pr_state)-8)*4-1 downto (state_type'pos(pr_state)-8)*4-4));
-				nx_state <= state_type'VAL(state_type'pos(pr_state)-9);
+				nx_state <= state_type'val(state_type'pos(pr_state)-9);
 				
 			when ReturnHome_H => DB <= "1000"; nx_state <= ReturnHome_L; -- state 0
 			when ReturnHome_L => DB <= "0000"; nx_state <= W8H;
