@@ -12,7 +12,7 @@ end entity;
 
 architecture rtl of one_hot_state_counter is
 
-	function nand_reduction(slv: std_logic_vector) return std_logic is
+	function nor_reduction(slv: std_logic_vector) return std_logic is
 	begin
 		if unsigned(slv)=0 then return '1';
 		else                    return '0';
@@ -25,7 +25,7 @@ begin
 	begin
 		if rising_edge(clk) then
 			n_phase_clk <= n_phase_clk(NUM_PHASES-2 downto 0) &
-			               nand_reduction(n_phase_clk(NUM_PHASES-2 downto 0));
+			               nor_reduction(n_phase_clk(NUM_PHASES-2 downto 0));
 		end if;
 	end process;
 
