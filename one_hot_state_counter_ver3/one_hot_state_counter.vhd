@@ -12,7 +12,7 @@ end entity;
 
 architecture rtl of one_hot_state_counter is
 
-	function nand_reduction(slv: std_logic_vector) return std_logic	is
+	function nand_reduction(slv: std_logic_vector) return std_logic is
 	begin
 		if unsigned(slv)=0 then return '1';
 		else                    return '0';
