@@ -4,17 +4,12 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 package subprograms_pkg is
-	function slv_to_bcd(
-		slv: std_logic_vector
-	) return std_logic_vector;
+	function slv_to_bcd(slv: std_logic_vector) return std_logic_vector;
 end package;
 
 package body subprograms_pkg is
 
-	function slv_to_bcd(
-		slv: std_logic_vector
-	) return std_logic_vector is
-
+	function slv_to_bcd(slv: std_logic_vector) return std_logic_vector is
 		-- 元の値の整数表現
 		constant INT: natural := to_integer(unsigned(slv));
 		-- BCD表現での桁数
