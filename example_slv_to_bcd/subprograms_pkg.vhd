@@ -26,7 +26,7 @@ package body subprograms_pkg is
 	begin
 		for i in slv'length-1 downto 1 loop
 			bcd := bcd(NUM_OUT_BITS-2 downto 0) & slv(i);
-			for j in num_bcd downto 1 loop
+			for j in NUM_BCD downto 1 loop
 				if bcd(j*4-1 downto j*4-4) > 4 then
 					bcd(j*4-1 downto j*4-4) := bcd(j*4-1 downto j*4-4) + 3;
 				end if;
