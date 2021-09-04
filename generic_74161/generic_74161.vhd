@@ -30,15 +30,15 @@ begin
 	process(clk)
 	begin
 
-		-- 非同期リセット
+		-- asynchronous reset
 		if aclr_n = '0' then
 			count <= 0;
 
 		elsif rising_edge(clk) then
-			-- 同期ロード
+			-- synchronous load
 			if sload_n = '0' then
 				count <= to_integer(unsigned(d));
-			-- 同期カウント
+			-- synchronous count
 			elsif p and t then
 				if count >= COUNT_MAX then
 					count <= 0;
