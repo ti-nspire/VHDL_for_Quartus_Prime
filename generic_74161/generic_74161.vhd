@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity hc161 is
+entity generic_74161 is
 	generic(
 		NUM_BITS: natural := 4
 	);
@@ -19,7 +19,7 @@ entity hc161 is
 	);
 end entity;
 
-architecture rtl of hc161 is
+architecture rtl of generic_74161 is
 	signal count: natural range 0 to 2**NUM_BITS - 1;
 	constant COUNT_MAX: natural := 2**NUM_BITS - 1;
 begin
