@@ -33,22 +33,18 @@ begin
 	process(all)
 		variable which_word: natural;
 	begin
-		which_word := to_integer(unsigned(sel));
 
 		-- implement a strobe feature.
 		if strobe = '1' then
 			outp <= (others => '0');
 
 		-- implement a mux feature.
-		elsif which_word <= NUM_WORDS-1 then
+		else
+			which_word := to_integer(unsigned(sel));
 			case which_word is
 				when 0 to NUM_WORDS-1 => outp <= inp(which_word);
 				when others           => outp <= (others => '0');
 			end case;
-
-		-- just to be safe.
-		else
-			outp <= (others => '0');
 		end if;
 	end process;
 
