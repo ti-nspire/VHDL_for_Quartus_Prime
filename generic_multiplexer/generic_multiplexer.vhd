@@ -33,7 +33,6 @@ begin
 	process(all)
 		variable which_word: natural;
 	begin
-
 		-- implement a strobe feature.
 		if strobe = '1' then
 			outp <= (others => '0');
