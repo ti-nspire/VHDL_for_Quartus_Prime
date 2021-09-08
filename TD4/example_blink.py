@@ -30,15 +30,16 @@ WIDTH =  8
 DEPTH = 16
 _ = [0] * DEPTH
 
-_[0] = OUT(0b0011)
-_[1] = OUT(0b0110)
-_[2] = OUT(0b1100)
-_[3] = OUT(0b1000)
-_[4] = OUT(0b1000)
-_[5] = OUT(0b1100)
-_[6] = OUT(0b0110)
-_[7] = OUT(0b0011)
-_[8] = OUT(0b0001)
-_[9] = JMP(0)
+pc = -1
+_[(pc:=pc+1)] = OUT(0b0011)
+_[(pc:=pc+1)] = OUT(0b0110)
+_[(pc:=pc+1)] = OUT(0b1100)
+_[(pc:=pc+1)] = OUT(0b1000)
+_[(pc:=pc+1)] = OUT(0b1000)
+_[(pc:=pc+1)] = OUT(0b1100)
+_[(pc:=pc+1)] = OUT(0b0110)
+_[(pc:=pc+1)] = OUT(0b0011)
+_[(pc:=pc+1)] = OUT(0b0001)
+_[(pc:=pc+1)] = JMP(pc+1)
 
 generate_mif(FILE_NAME, WIDTH, DEPTH, _)
