@@ -64,7 +64,7 @@ begin
 			clock   => clk_inside
 		);
 		
-   -- ROMへ与えるクロックよりもCPUへ与えるクロックを遅らせるためDFFに2回通す。
+	-- ROMへ与えるクロックよりもCPUへ与えるクロックを遅らせるためDFFに2回通す。
 	process(source_clk)
 	begin
 		if rising_edge(source_clk) then
@@ -73,6 +73,6 @@ begin
 		end if;
 	end process;
 
-   -- 確認用としてクロックを出力できるようにしておく。
+	-- 確認用としてクロックを出力できるようにしておく。
 	clk_out <= clk_inside; 
 end architecture;
