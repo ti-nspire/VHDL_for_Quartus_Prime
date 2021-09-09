@@ -33,7 +33,8 @@ begin
 	              "1011" & "11" when op_code = "1011" else -- OUT Im
 	              "0111" & "11" when op_code = "1110" and c_flag_n = '1' else -- JNC (C=0)
 	              "1111" & "--" when op_code = "1110" and c_flag_n = '0' else -- JNC (C=1)
-	              "0111" & "11" when op_code = "1111"; -- JMP
+	              "0111" & "11" when op_code = "1111" else -- JMP
+	              "----" & "--" ;
 
 	-- A、B、OUTの各レジスタおよびPCへ与える!ロード信号を抜いて返す。
 	load_n <= load_n_sel(5 downto 2);
