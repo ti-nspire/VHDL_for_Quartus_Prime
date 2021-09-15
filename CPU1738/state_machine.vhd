@@ -16,14 +16,14 @@ entity state_machine is
 end entity;
 
 architecture rtl of state_machine is
+	signal halt_temp : std_logic;
+	signal pc_up_temp: std_logic;
 begin
 	process(all)
-		variable halt_temp : std_logic;
-		variable pc_up_temp: std_logic;
 	begin
 
-		halt_temp := (halt_n nor pc_up); 
-		pc_up_temp:= (pc_ld  nor pc_up);
+		halt_temp  <= halt_n nor pc_up; 
+		pc_up_temp <= pc_ld  nor pc_up;
 
 		if aclr_n = '0' then
 			halt   <= '0';
