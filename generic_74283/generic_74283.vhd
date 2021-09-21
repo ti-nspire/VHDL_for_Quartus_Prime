@@ -26,7 +26,7 @@ begin
 	temp_sum <= ('0' & unsigned(a)) + unsigned(b) + ('0' & cin);
 
 	-- 和だけを抜いて返す。
-	sum <= std_logic_vector(temp_sum)(NUM_BITS-1 downto 0);
+	sum <= std_logic_vector(temp_sum(NUM_BITS-1 downto 0));
 
 	-- キャリーアウトだけを抜いて返す。
 	cout <= temp_sum(NUM_BITS);
