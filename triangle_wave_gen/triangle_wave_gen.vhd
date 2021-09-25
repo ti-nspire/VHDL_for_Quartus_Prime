@@ -20,17 +20,16 @@ entity triangle_wave_gen is
 end entity;
 
 architecture rtl of triangle_wave_gen is
-	constant Q_MAX  : positive := 2**NUM_OUT_BITS - 1;
-
-	signal freq_temp: positive range 1 to F_OUT_MAX;
-	signal top_val  : positive range 1 to F_CLK / 2;
+	constant Q_MAX: positive := 2**NUM_OUT_BITS - 1;
+	signal top_val: positive range 1 to F_CLK / 2;
 begin
 
 	-- 出力周波数の設定値が変化したらカウンターのトップ値を入れ換える。
 	process(freq)
+		variable freq_temp: positive range 1 to F_OUT_MAX := F_OUT_MAX;
 	begin
-		if unsigned(freq) > 0 then freq_temp <= to_integer(unsigned(freq));
-		else                       freq_temp <= F_OUT_MAX;
+		if unsigned(freq) > 0 then freq_temp := to_integer(unsigned(freq));
+		else                       freq_temp := F_OUT_MAX;
 		end if;
 		top_val <= F_CLK / (2 * freq_temp);
 	end process;
