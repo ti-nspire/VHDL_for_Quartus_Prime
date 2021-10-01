@@ -13,7 +13,7 @@ package body subprograms_pkg is
 		-- 元の値の整数表現
 		constant INT: natural := to_integer(unsigned(slv));
 		-- BCD表現での桁数
-		constant NUM_BCD: natural := to_integer(ceil(log10(real(INT+1.0))));
+		constant NUM_BCD: natural := to_integer(ceil(log10(real(INT + 1))));
 		-- 出力に必要なビット数。
 		constant NUM_OUT_BITS: natural := NUM_BCD*4;
 		-- 出力値の假置き変数
