@@ -5,13 +5,12 @@ use ieee.numeric_std.all;
 entity clk_gen is
 	generic(
 		F_CLK   : positive := 48_000_000;
-		--OUT_FREQ: natural := 9600
-		OUT_FREQ: positive := 9600 * 16
+		OUT_FREQ: natural := 9600
 		);
 	port(
 		aclr_n : in  std_logic;
 		clk    : in  std_logic;
-		clk_out: out std_logic := '0'
+		clk_out: out std_logic
 	);
 end entity;
 
