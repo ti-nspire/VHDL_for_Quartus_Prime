@@ -7,10 +7,10 @@ entity generic_74161 is
 		NUM_BITS: natural := 4
 	);
 	port(
-		clk       : in std_logic;
-		aclr_n    : in std_logic;
-		sload_n   : in std_logic;
-		d         : in std_logic_vector(NUM_BITS-1 downto 0);
+		clk    : in std_logic;
+		aclr_n : in std_logic;
+		sload_n: in std_logic;
+		d      : in std_logic_vector(NUM_BITS-1 downto 0);
 		
 		p, t: in std_logic;
 		
