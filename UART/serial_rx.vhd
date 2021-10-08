@@ -69,7 +69,7 @@ begin
 						buf  <= din_temp & buf(7 downto 1); -- lsbから順番に読み取って、
 						cbit <= cbit + 1;
 					when 135 =>
-						dout  <= buf; -- 全部読み取り終えたらすぐにデータを確保して、
+						dout <= buf; -- 全部読み取り終えたらすぐにデータを確保して、
 						cbit <= cbit + 1;
 					when 159 => -- ストップビットの末尾で、
 						cbit  <=  0 ;
