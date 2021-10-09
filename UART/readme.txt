@@ -2,5 +2,5 @@
 UART.vhdをトップレベルエンティティとしてコンパイルする。
 
 注意:
-正論理の場合はPOL_INV: std_logic := '0' にしてコンパイルする。
-負論理の場合はPOL_INV: std_logic := '1' にしてコンパイルする。
+正論理の場合はUART.vhdをPOL_INV: std_logic := '0' にしてコンパイルする。
+負論理の場合はUART.vhdをPOL_INV: std_logic := '1' にしてコンパイルする。
