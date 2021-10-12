@@ -27,7 +27,7 @@ begin
 	q   <= std_logic_vector(to_unsigned(count, NUM_BITS));
 	rco <= '1' when t = '1' and count >= COUNT_MAX else '0';
 
-	process(all)
+	process(aclr_n, clk)
 	begin
 
 		-- asynchronous reset
