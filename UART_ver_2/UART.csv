@@ -1,0 +1,45 @@
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+
+# Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+# File: D:\MAX_10\UART\UART.csv
+# Generated on: Sat Oct 23 11:55:13 2021
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,Weak Pull-Up Resistor,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation,Fitter Location
+aclr_n,Input,PIN_22,on,1B,B1_N0,3.3-V LVTTL,,,,,,PIN_22
+clk,Input,PIN_27,,2,B2_N0,3.3-V LVTTL,,,,,,PIN_27
+rd,Output,PIN_33,,2,B2_N0,3.3-V LVTTL,,,,,,PIN_33
+rx,Input,PIN_25,,1B,B1_N0,3.3-V LVTTL,,,,,,PIN_25
+rx_data[7],Output,PIN_62,,4,B4_N0,3.3-V LVTTL,,,,,,PIN_62
+rx_data[6],Output,PIN_61,,4,B4_N0,3.3-V LVTTL,,,,,,PIN_61
+rx_data[5],Output,PIN_60,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_60
+rx_data[4],Output,PIN_59,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_59
+rx_data[3],Output,PIN_58,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_58
+rx_data[2],Output,PIN_57,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_57
+rx_data[1],Output,PIN_56,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_56
+rx_data[0],Output,PIN_55,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_55
+tx,Output,PIN_32,,2,B2_N0,3.3-V LVTTL,,,,,,PIN_32
+tx_data[7],Input,PIN_124,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_124
+tx_data[6],Input,PIN_127,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_127
+tx_data[5],Input,PIN_130,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_130
+tx_data[4],Input,PIN_131,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_131
+tx_data[3],Input,PIN_132,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_132
+tx_data[2],Input,PIN_134,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_134
+tx_data[1],Input,PIN_135,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_135
+tx_data[0],Input,PIN_140,,8,B8_N0,3.3-V LVTTL,,,,,,PIN_140
+tx_ready,Output,PIN_38,,3,B3_N0,3.3-V LVTTL,,,,,,PIN_38
+wr,Input,PIN_24,,1B,B1_N0,3.3-V LVTTL,,,,,,PIN_24
