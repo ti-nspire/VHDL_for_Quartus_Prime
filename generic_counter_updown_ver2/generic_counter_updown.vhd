@@ -37,7 +37,7 @@ begin
 			elsif count >= TOP_VAL    then is_climbing_temp := '0';
 			end if;
 		end if;
-		q           <= std_logic_vector(to_unsigned(count, NUM_BITS));
+		q           <= std_logic_vector(to_unsigned(count, q'length));
 		is_climbing <= is_climbing_temp;
 	end process;
 
