@@ -18,7 +18,7 @@
 -- suit user's needs .Comments are provided in each section to help the user  
 -- fill out necessary details.                                                
 -- ***************************************************************************
--- Generated on "11/03/2021 14:20:43"
+-- Generated on "11/05/2021 12:53:41"
                                                             
 -- Vhdl Test Bench template for design  :  generic_counter_updown
 -- 
@@ -35,14 +35,14 @@ ARCHITECTURE generic_counter_updown_arch OF generic_counter_updown_vhd_tst IS
 -- signals                                                   
 SIGNAL aclr_n : STD_LOGIC;
 SIGNAL clk : STD_LOGIC;
+SIGNAL count : STD_LOGIC_VECTOR(3 DOWNTO 0);
 SIGNAL is_climbing : STD_LOGIC;
-SIGNAL q : STD_LOGIC_VECTOR(3 DOWNTO 0);
 COMPONENT generic_counter_updown
 	PORT (
 	aclr_n : IN STD_LOGIC;
 	clk : IN STD_LOGIC;
-	is_climbing : OUT STD_LOGIC;
-	q : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+	count : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+	is_climbing : OUT STD_LOGIC
 	);
 END COMPONENT;
 BEGIN
@@ -51,11 +51,10 @@ BEGIN
 -- list connections between master ports and signals
 	aclr_n => aclr_n,
 	clk => clk,
-	is_climbing => is_climbing,
-	q => q
+	count => count,
+	is_climbing => is_climbing
 	);
 
-	
 process
 begin
 	aclr_n <='1'; wait for 265 ns;
@@ -67,6 +66,6 @@ process
 begin
 	clk <= '0'; wait for 10 ns;
 	clk <= '1'; wait for 10 ns;
-end process;		
+end process;			
 	
 END generic_counter_updown_arch;
