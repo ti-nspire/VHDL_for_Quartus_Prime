@@ -6,7 +6,7 @@ entity clk_gen is
 	generic(
 		F_CLK   : positive := 48_000_000;
 		OUT_FREQ: natural := 9600
-		);
+	);
 	port(
 		aclr_n : in  std_logic;
 		clk    : in  std_logic;
