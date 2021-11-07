@@ -74,6 +74,6 @@ begin
 		pol_inv     => pol_inv,
 		pwm_out     => pwm_outs(i)
 	);
-    end generate;
+	end generate;
 	
 end architecture;
