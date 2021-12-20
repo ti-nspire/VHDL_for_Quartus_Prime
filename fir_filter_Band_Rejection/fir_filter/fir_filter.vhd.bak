@@ -1,0 +1,75 @@
+--refer to https://forum.digikey.com/t/fir-filter-vhdl/12861
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+package types is
+	type array_slv is array(natural range <>) of std_logic_vector;
+	type array_sig is array(natural range <>) of signed;
+end package;
+--------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
+use work.types.all;
+
+entity fir_filter is
+	generic(
+		TAPS        : integer := 51; --number of fir filter taps
+		DATA_WIDTH  : integer := 10; --width of data input including sign bit
+		COEFF_WIDTH : integer := 32  --width of coefficients including sign bit
+	);
+	port(
+		clk          : in  std_logic;                                 --system clock
+		aclr_n       : in  std_logic;                                 --active low asynchronous reset
+		data         : in  std_logic_vector(DATA_WIDTH - 1 downto 0); --data stream
+		coefficients : in  array_slv(0 to TAPS - 1)(COEFF_WIDTH - 1 downto 0); --coefficient array
+		result       : out std_logic_vector((DATA_WIDTH + COEFF_WIDTH + integer(ceil(log2(real(TAPS)))) - 1) downto 0)  --filtered resultend fir_filter
+	);
+end entity;	
+
+architecture rtl of fir_filter is
+	signal coeff_inside  : array_slv(coefficients'range)(coefficients(0)'range); --array of latched in coefficient values
+	signal data_pipeline : array_sig(coefficients'range)(data'range); --pipeline of historic data values
+	
+	--乗算器は明示的にDSPブロックに置く。
+	signal products : array_sig(coefficients'range)((DATA_WIDTH + COEFF_WIDTH) - 1 downto 0); --array of coefficient*data products
+	attribute multstyle : string;
+	attribute multstyle of products : signal is "dsp";
+begin
+
+	process(clk, aclr_n)
+		variable sum : signed(result'range); --sum of products
+	begin
+
+		if not aclr_n then                                --asynchronous reset
+			data_pipeline <= (others => (others => '0')); --clear data pipeline values
+			coeff_inside  <= (others => (others => '0')); --clear internal coefficient registers
+			result        <= (others => '0');             --clear result output
+			
+		elsif rising_edge(clk) then                                       --not reset
+			coeff_inside  <= coefficients;                                --input coefficients    
+			data_pipeline <= signed(data) & data_pipeline(0 to TAPS - 2); --shift new data into data pipeline
+
+			sum := (others => '0');                                       --initialize sum
+			for i in products'range loop
+				sum := sum + products(i);                                 --add the products
+			end loop;
+			result <= std_logic_vector(sum);                              --output result
+
+		end if;
+
+	end process;
+	
+	---------
+	--乗算器--
+	---------
+	product_calc: for i in 0 to TAPS - 1 generate
+		products(i) <= data_pipeline(i) * signed(coeff_inside(i));
+	end generate;
+	
+end architecture;
