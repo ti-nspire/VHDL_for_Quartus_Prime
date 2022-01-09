@@ -40,7 +40,9 @@ architecture rtl of fir_filter_experiment is
 		16b"0",16x"A57E",16x"8001",16x"A57E",
 		16b"0",16x"5A82",16x"7FFF",16x"5A82",
 		16b"0",16x"A57E",16x"8001",16x"A57E"
-	);
+);
+	-- 計算結果に必要なビット数はceil(log2(3 * (1023 * (0x5A82 + 0x7FFF + 0x5A82))))
+	constant BITS_NEEDED : natural := 28;
 	------------------------------------------------------------------
 
 	constant COEFF_WIDTH   : natural := coeffs_list(0)'length;
@@ -62,7 +64,7 @@ begin
 	
 	--計算結果の10ビット分(-512～511)を(0～1023)にずらしてからDACへ渡す。
 	--da_val <= std_logic_vector(signed(result_inside(RESULTS_WIDTH-1 downto RESULTS_WIDTH-10))+512);
-	da_val <= std_logic_vector(signed(result_inside(RESULTS_WIDTH-3 downto RESULTS_WIDTH-12))+512);
+	da_val <= std_logic_vector(signed(result_inside(BITS_NEEDED-1 downto BITS_NEEDED-10))+512);
 
 
 	-------------------------------------------------------
