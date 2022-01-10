@@ -33,7 +33,7 @@ architecture rtl of fir_filter_experiment is
 		0, sin(-pi/4), -1, sin(-pi/4),
 		0, sin( pi/4),  1, sin( pi/4),
 		0, sin(-pi/4), -1, sin(-pi/4),
-		↑これを下のようにsined 16ビットに整数化する。
+		↑これを下のようにsigned 16ビットに整数化する。
 		*/
 
 		16b"0",16x"5A82",16x"7FFF",16x"5A82",
