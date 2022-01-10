@@ -1,32 +1,32 @@
 import scipy.signal
 import numpy as np
 """
-\•¶: scipy.signal.firwin(numtaps, cutoff, width=None, window='hamming', pass_zero=True, scale=True, nyq=None, fs=None)
+æ§‹æ–‡: scipy.signal.firwin(numtaps, cutoff, width=None, window='hamming', pass_zero=True, scale=True, nyq=None, fs=None)
 
 pass_zero : 'bandpass', 'lowpass', 'highpass', 'bandstop'
-window : boxcar, blackman, hamming, hann, flattop, bohman, blackmanharris, ‚»‚Ì‘¼
+window : boxcar, blackman, hamming, hann, flattop, bohman, blackmanharris, ãã®ä»–
 """
-COEFF_WIDTH = 16  #ŒW”‚Ìƒrƒbƒg”
-NUM_COEFFS  = 101 #ŒW”‚ÌŒÂ”(ƒ^ƒbƒv”)BŠï”‚Åw’è‚·‚éB
+COEFF_WIDTH = 16  #ä¿‚æ•°ã®ãƒ“ãƒƒãƒˆæ•°
+NUM_COEFFS  = 101 #ä¿‚æ•°ã®å€‹æ•°(ã‚¿ãƒƒãƒ—æ•°)ã€‚å¥‡æ•°ã§æŒ‡å®šã™ã‚‹ã€‚
 SAMPLE_FREQ = 40_000
 CUT_OFF     = [1_000, 4_000]
 FILTER_TYPE = "bandstop"
 WINDOW      = "hamming"
 
-#ŒW”‚ğŒvZ‚µ‚ÄA
+#ä¿‚æ•°ã‚’è¨ˆç®—ã—ã¦ã€
 coeffs = scipy.signal.firwin(NUM_COEFFS, CUT_OFF, window=WINDOW, pass_zero=FILTER_TYPE, fs=SAMPLE_FREQ)
 #print(*coeffs, sep=',')
 
-#ŒW”‚ª”ÍˆÍ(-1… ŒW” < 1)‚ğ’´‚¦‚Ä‚¢‚È‚¢‚©Šm‚©‚ß‚ÄA
+#ä¿‚æ•°ãŒç¯„å›²(-1â‰¦ ä¿‚æ•° < 1)ã‚’è¶…ãˆã¦ã„ãªã„ã“ã¨ã‚’å¿µã®ãŸã‚ç¢ºã‹ã‚ã¦ã€
 print("No Good")  if len(coeffs[coeffs < -1]) + len(coeffs[coeffs > 1 - 1/2**(COEFF_WIDTH - 1)]) else print("IS OK")
 
-#ŒW”‚ğŒÅ’è¬”“_”‰»(®”‰»B•„†‚É1ƒrƒbƒgA®”•”‚È‚µAc‚è‚ğ¬”ƒrƒbƒg‚ÉŠ„‚è“–‚Ä)‚µ‚ÄA
+#ä¿‚æ•°ã‚’å›ºå®šå°æ•°ç‚¹æ•°åŒ–(æ•´æ•°åŒ–ã€‚ç¬¦å·ã«1ãƒ“ãƒƒãƒˆã€æ•´æ•°éƒ¨ãªã—ã€æ®‹ã‚Šã‚’å°æ•°ãƒ“ãƒƒãƒˆã«å‰²ã‚Šå½“ã¦)ã—ã¦ã€
 coeffs = np.asarray(np.round(coeffs * 2**(COEFF_WIDTH - 1)), dtype=np.int64)
 #print(*coeffs, sep=",")
 
-#‚»‚ê‚ª•‰”‚Å‚ ‚Á‚½‚ç2‚Ì•â”‚É‚¸‚ç‚µ‚ÄA
+#ãã‚ŒãŒè² æ•°ã§ã‚ã£ãŸã‚‰2ã®è£œæ•°ã«ãšã‚‰ã—ã¦ã€
 coeffs = np.asarray(np.where(coeffs < 0, coeffs + 2**COEFF_WIDTH, coeffs), dtype=np.uint64)
 #print(*coeffs, sep=",")
 
-#array(0 to TAPS - 1)(COEFF_WIDTH - 1 downto 0)‚ÌŒ`‚É‘ÌÙ‚ğ®‚¦‚Äo—Í‚·‚éB
+#array(0 to TAPS - 1)(COEFF_WIDTH - 1 downto 0)ã®å½¢ã«ä½“è£ã‚’æ•´ãˆã¦å‡ºåŠ›ã™ã‚‹ã€‚
 print(*[str(COEFF_WIDTH) + 'd"' + str(coeff) + '"'for coeff in coeffs], sep=",")
