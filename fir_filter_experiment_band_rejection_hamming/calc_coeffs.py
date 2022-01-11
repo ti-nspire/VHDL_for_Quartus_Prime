@@ -18,7 +18,7 @@ coeffs = scipy.signal.firwin(NUM_COEFFS, CUT_OFF, window=WINDOW, pass_zero=FILTE
 #print(*coeffs, sep=',')
 
 #係数が範囲(-1≦ 係数 < 1)を超えていないことを念のため確かめて、
-print("No Good")  if len(coeffs[coeffs < -1]) + len(coeffs[coeffs > 1 - 1/2**(COEFF_WIDTH - 1)]) else print("IS OK")
+print("No Good") if (np.min(coeffs) < -1) or (np.max(coeffs) >= 1) else print("IS OK")
 
 #係数を固定小数点数化(整数化。符号に1ビット、整数部なし、残りを小数ビットに割り当て)して、
 coeffs = np.asarray(np.round(coeffs * 2**(COEFF_WIDTH - 1)), dtype=np.int64)
