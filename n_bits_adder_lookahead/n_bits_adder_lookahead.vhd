@@ -4,7 +4,7 @@ use ieee.std_logic_misc.all;
 
 entity n_bits_adder_lookahead is
     generic (
-        NUM_BITS: natural := 8
+        NUM_BITS: natural := 4
     );
     port (
         c0: in std_logic;
@@ -17,36 +17,33 @@ entity n_bits_adder_lookahead is
 end entity;
 
 architecture logic of n_bits_adder_lookahead is
-    signal g: std_logic_vector(NUM_BITS-1 downto 0);
-    signal p: std_logic_vector(NUM_BITS-1 downto 0);
-    signal c: std_logic_vector(NUM_BITS downto 0);
-    
-    type type_1dx1d is array(1 to NUM_BITS) of std_logic_vector(NUM_BITS-1 downto 0);
-    signal term: type_1dx1d;
-
-    -- 最適化されないようにする。
-    attribute keep: boolean;
-    attribute keep of g, p, c, term: signal is true;
 begin
-    c(0) <= c0;
-    g <= x and y;
-    p <= x or y;
 
-    process(g, p, c, term)
+    process(c0, x, y)
+        variable g: std_logic_vector(NUM_BITS-1 downto 0) := (others => '0');
+        variable p: std_logic_vector(NUM_BITS-1 downto 0) := (others => '0');
+        variable c: std_logic_vector(NUM_BITS downto 0) := (others => '0');
+        
+        type term_t is array(1 to NUM_BITS) of std_logic_vector(NUM_BITS-1 downto 0);
+        variable term: term_t := (others => (others => '0'));
     begin
+        c(0) := c0;
+        g := x and y;
+        p := x or y;
+
         for i in 1 to NUM_BITS loop
         for j in 0 to i-1 loop
-            if j=0 then
-                term(i)(j) <= and_reduce(p(i-1 downto 0) & c(0));
+            if (j > 0) then
+                term(i)(j) := and_reduce(p(i-1 downto j) & g(j-1));
             else
-                term(i)(j) <= and_reduce(p(i-1 downto j) & g(j-1));
+                term(i)(0) := and_reduce(p(i-1 downto 0) & c(0));    
             end if;
-            c(i) <= or_reduce(g(i-1) & term(i)(j downto 0));
+            c(i) := or_reduce(g(i-1) & term(i)(j downto 0));
         end loop;
         end loop;
+        
+        cout <= c(NUM_BITS);
+        s <= x xor y xor c(NUM_BITS-1 downto 0);
     end process;
-    
-    cout <= c(NUM_BITS);
-    s <= x xor y xor c(NUM_BITS-1 downto 0);
 
 end architecture;
