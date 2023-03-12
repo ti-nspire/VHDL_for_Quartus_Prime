@@ -16,6 +16,7 @@ entity multiplier_unsigned is
 end entity;
 
 architecture logic of multiplier_unsigned is
+    -- partial product
     type pp_t is array(0 to NUM_BITS-1) of std_logic_vector(NUM_BITS downto 0);
     signal pp: pp_t;
 begin
