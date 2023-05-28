@@ -3,23 +3,21 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity clk_gen is
-	generic(
-		F_CLK   : positive := 48_000_000;
+	generic (
+		F_CLK: positive := 48_000_000;
 		OUT_FREQ: natural := 9600
 	);
-	port(
-		aclr_n : in  std_logic;
-		clk    : in  std_logic;
+	port (
+		aclr_n, clk : in  std_logic;
 		clk_out: out std_logic
 	);
 end entity;
 
 architecture rtl of clk_gen is
 begin
-
-	process(aclr_n, clk)
-		constant TOP_VAL: natural                    := F_CLK/(OUT_FREQ * 2) - 1;
-		variable count  : natural range 0 to TOP_VAL := 0;
+	process (aclr_n, clk)
+		constant TOP_VAL: natural := F_CLK/(OUT_FREQ * 2) - 1;
+		variable count : natural range 0 to TOP_VAL := 0;
 	begin
 		if aclr_n = '0' then
 			count := 0;
@@ -32,5 +30,4 @@ begin
 			end if;
 		end if;
 	end process;
-
 end architecture;
